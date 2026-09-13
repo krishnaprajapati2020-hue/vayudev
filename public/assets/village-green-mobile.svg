@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vgm-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F2F7F4"/>
+    </linearGradient>
+    <filter id="vgm-shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Mobile View Background -->
+  <rect width="500" height="800" fill="url(#vgm-bg)"/>
+
+  <!-- Mobile Header Bar -->
+  <rect width="500" height="70" fill="#1B4D3E"/>
+  <g transform="translate(24, 20)">
+    <circle cx="16" cy="16" r="14" fill="#2D6A4F"/>
+    <path d="M12 8 C8 8 5 11 5 16 C5 21 8 26 12 30 C13 31 15 31 16 30 C18 27 19 23 19 19 C23 19 27 16 27 12 C27 8 22 5 18 5 Z" fill="#A7D7C5"/>
+    <text x="38" y="16" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', serif" font-size="14" font-weight="800">VILLAGE GREEN</text>
+    <text x="38" y="27" fill="#A7D7C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="8" font-weight="700" letter-spacing="1">DENTAL CENTER</text>
+  </g>
+
+  <!-- Mobile Menu Hamburger & Call Button -->
+  <g transform="translate(420, 22)">
+    <rect width="54" height="28" rx="14" fill="#2D6A4F"/>
+    <text x="27" y="18" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700">CALL</text>
+  </g>
+
+  <!-- Mobile Emergency & Trust Banner -->
+  <rect y="70" width="500" height="34" fill="#D8F3DC"/>
+  <text x="250" y="92" text-anchor="middle" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700">
+    ⭐ 4.9 Rating (500+ Reviews) • Aurora, IL
+  </text>
+
+  <!-- Mobile Hero Card -->
+  <g transform="translate(24, 125)">
+    <rect width="452" height="240" rx="16" fill="#FFFFFF" stroke="#D1E7DD" stroke-width="1.5" filter="url(#vgm-shadow)"/>
+    <text x="24" y="40" fill="#2D6A4F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="1">
+      WELCOME TO VILLAGE GREEN DENTAL
+    </text>
+    <text x="24" y="75" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="24" font-weight="800">
+      Gentle, Modern Dental Care
+    </text>
+    <text x="24" y="102" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="24" font-weight="800">
+      for Your Whole Family
+    </text>
+    <text x="24" y="132" fill="#4B6358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+      Providing comprehensive family &amp; cosmetic dentistry in Aurora and Naperville since 1983.
+    </text>
+
+    <!-- CTAs -->
+    <rect x="24" y="165" width="200" height="44" rx="22" fill="#1B4D3E"/>
+    <text x="124" y="192" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700">
+      Book Appointment →
+    </text>
+
+    <rect x="236" y="165" width="190" height="44" rx="22" fill="#FFFFFF" stroke="#2D6A4F" stroke-width="1.5"/>
+    <text x="331" y="192" text-anchor="middle" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700">
+      Call (630) 851-0710
+    </text>
+  </g>
+
+  <!-- Mobile Quick Service Tiles -->
+  <g transform="translate(24, 385)">
+    <rect width="218" height="90" rx="14" fill="#FFFFFF" stroke="#D1E7DD" stroke-width="1" filter="url(#vgm-shadow)"/>
+    <text x="20" y="36" font-size="20">✨</text>
+    <text x="52" y="34" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="14" font-weight="700">Cosmetic Care</text>
+    <text x="20" y="65" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">Invisalign &amp; Whitening</text>
+
+    <g transform="translate(234, 0)">
+      <rect width="218" height="90" rx="14" fill="#FFFFFF" stroke="#D1E7DD" stroke-width="1" filter="url(#vgm-shadow)"/>
+      <text x="20" y="36" font-size="20">🦷</text>
+      <text x="52" y="34" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="14" font-weight="700">Dental Implants</text>
+      <text x="20" y="65" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">Durable Restoration</text>
+    </g>
+  </g>
+
+  <!-- Mobile QA & Responsiveness Seal -->
+  <g transform="translate(24, 495)">
+    <rect width="452" height="110" rx="16" fill="#1B4D3E"/>
+    <text x="24" y="36" fill="#A7D7C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" letter-spacing="1">
+      MOBILE-FIRST RESPONSIVE PERFECTION
+    </text>
+    <text x="24" y="62" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="16" font-weight="700">
+      Zero Defects on iOS &amp; Android Devices
+    </text>
+    <text x="24" y="86" fill="#D1E7DD" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">
+      Fast 0.8s mobile load • Elementor Pro &amp; ACF Pro Architecture
+    </text>
+  </g>
+
+  <!-- Bottom Nav bar mockup -->
+  <g transform="translate(24, 625)">
+    <rect width="452" height="130" rx="16" fill="#FFFFFF" stroke="#E5E7EB" filter="url(#vgm-shadow)"/>
+    <text x="226" y="36" text-anchor="middle" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700">
+      Village Green Dental Center
+    </text>
+    <text x="226" y="58" text-anchor="middle" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">
+      2853 E New York St, Aurora, IL 60502
+    </text>
+    <text x="226" y="80" text-anchor="middle" fill="#2D6A4F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600">
+      villagegreennb.wpenginepowered.com
+    </text>
+    <text x="226" y="105" text-anchor="middle" fill="#9CA3AF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">
+      QA Lead &amp; Senior Dev: Krishna Prajapat
+    </text>
+  </g>
+</svg>

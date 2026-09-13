@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vg-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7FAF8"/>
+      <stop offset="100%" stop-color="#EAF2ED"/>
+    </linearGradient>
+    <linearGradient id="vg-primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1B4D3E"/>
+      <stop offset="100%" stop-color="#2D6A4F"/>
+    </linearGradient>
+    <linearGradient id="vg-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F2D24" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="750" fill="url(#vg-bg)"/>
+
+  <!-- Top Announcement Bar -->
+  <rect width="1200" height="38" fill="#1B4D3E"/>
+  <text x="50" y="24" fill="#D1E7DD" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+    📍 2853 E New York St, Aurora, IL 60502 • Serving Aurora &amp; Naperville Area Since 1983
+  </text>
+  <text x="1150" y="24" text-anchor="end" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">
+    📞 (630) 851-0710 &nbsp;|&nbsp; 🕒 Mon–Sat Open
+  </text>
+
+  <!-- Navigation Bar -->
+  <rect y="38" width="1200" height="74" fill="#FFFFFF" filter="url(#shadow)"/>
+  
+  <!-- Logo Section -->
+  <g transform="translate(50, 52)">
+    <!-- Tooth + Leaf Icon -->
+    <path d="M18 4 C10 4 4 10 4 18 C4 26 8 36 14 44 C16 46 20 46 22 44 C26 40 28 34 28 28 C34 28 42 22 42 15 C42 8 34 4 26 4 C24 4 20 4 18 4 Z" fill="#2D6A4F"/>
+    <path d="M14 20 C18 14 26 12 32 16" stroke="#A7D7C5" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <text x="52" y="26" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', serif" font-size="20" font-weight="800" letter-spacing="0.5">VILLAGE GREEN</text>
+    <text x="52" y="42" fill="#52796F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="2">DENTAL CENTER</text>
+  </g>
+
+  <!-- Nav Links -->
+  <g transform="translate(430, 80)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#2F3E46">
+    <text x="0" y="0" fill="#1B4D3E">Home</text>
+    <line x1="0" y1="6" x2="38" y2="6" stroke="#2D6A4F" stroke-width="2"/>
+    <text x="75" y="0">About Us</text>
+    <text x="175" y="0">Dental Services ▾</text>
+    <text x="325" y="0">Smile Gallery</text>
+    <text x="445" y="0">Patient Reviews</text>
+  </g>
+
+  <!-- CTA Book Button -->
+  <g transform="translate(1010, 55)">
+    <rect width="140" height="40" rx="20" fill="url(#vg-primary)"/>
+    <text x="70" y="25" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" letter-spacing="0.5">BOOK ONLINE</text>
+  </g>
+
+  <!-- HERO SECTION -->
+  <!-- Left Column: Copy & Value Proposition -->
+  <g transform="translate(60, 160)">
+    <!-- Badge -->
+    <rect width="250" height="28" rx="14" fill="#D8F3DC"/>
+    <circle cx="16" cy="14" r="5" fill="#2D6A4F"/>
+    <text x="30" y="19" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="0.5">
+      40+ YEARS OF EXCELLENCE IN AURORA
+    </text>
+
+    <!-- Headline -->
+    <text x="0" y="75" fill="#112211" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="44" font-weight="800" line-height="1.2">
+      Gentle, Comprehensive
+    </text>
+    <text x="0" y="125" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="44" font-weight="800">
+      Dental Care for Every Smile
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="170" fill="#4B6358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="400">
+      Experience comfort-first family, cosmetic, and restorative dentistry.
+    </text>
+    <text x="0" y="192" fill="#4B6358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="400">
+      Featuring our signature Lifetime Smile Protection Warranty and state-of-the-art care.
+    </text>
+
+    <!-- Action Buttons -->
+    <g transform="translate(0, 225)">
+      <rect width="190" height="48" rx="24" fill="url(#vg-primary)" filter="url(#shadow)"/>
+      <text x="95" y="29" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">
+        Request Appointment →
+      </text>
+
+      <rect x="205" width="160" height="48" rx="24" fill="#FFFFFF" stroke="#2D6A4F" stroke-width="1.5"/>
+      <text x="285" y="29" text-anchor="middle" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">
+        View All Services
+      </text>
+    </g>
+
+    <!-- Trust Proof Metrics -->
+    <g transform="translate(0, 305)">
+      <circle cx="15" cy="15" r="14" fill="#FEF3C7"/>
+      <text x="15" y="20" text-anchor="middle" font-size="14">⭐</text>
+      <text x="36" y="14" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">4.9 / 5.0 Rating</text>
+      <text x="36" y="28" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">500+ Verified Patient Reviews</text>
+
+      <g transform="translate(230, 0)">
+        <circle cx="15" cy="15" r="14" fill="#D1FAE5"/>
+        <text x="15" y="20" text-anchor="middle" font-size="13">🛡️</text>
+        <text x="36" y="14" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">Lifetime Warranty</text>
+        <text x="36" y="28" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">Smile Protection Program</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Column: Visual Showcase Card & Interactive Preview Elements -->
+  <g transform="translate(680, 140)">
+    <!-- Container Card -->
+    <rect width="460" height="360" rx="24" fill="#FFFFFF" stroke="#C7D9D0" stroke-width="1.5" filter="url(#shadow)"/>
+
+    <!-- Operatory / Patient Visual Illustration -->
+    <rect x="16" y="16" width="428" height="230" rx="16" fill="#E2ECE6"/>
+    
+    <!-- Stylized Modern Clinic Backdrop -->
+    <path d="M16 160 Q 150 110, 280 170 T 444 140 L 444 246 L 16 246 Z" fill="#C8DDD2" opacity="0.6"/>
+    <circle cx="340" cy="90" r="45" fill="#B7D5C4" opacity="0.7"/>
+    <circle cx="110" cy="110" r="30" fill="#A4CAB3" opacity="0.5"/>
+
+    <!-- Dental Clinic Icon Graphic -->
+    <g transform="translate(190, 80)">
+      <circle cx="30" cy="30" r="38" fill="#FFFFFF" filter="url(#shadow)"/>
+      <path d="M22 18 C16 18 12 23 12 29 C12 37 16 44 22 50 C24 52 27 52 29 50 C33 46 35 41 35 36 C40 36 46 32 46 26 C46 21 40 18 34 18 C32 18 29 18 27 18 Z" fill="#2D6A4F"/>
+      <path d="M19 30 C22 25 28 23 33 26" stroke="#74C69D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <text x="230" y="180" text-anchor="middle" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', serif" font-size="18" font-weight="700">
+      Village Green Dental Center
+    </text>
+    <text x="230" y="202" text-anchor="middle" fill="#52796F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600">
+      Custom WordPress &amp; ACF Pro Architecture
+    </text>
+
+    <!-- Floating Badge on Card -->
+    <g transform="translate(30, 210)">
+      <rect width="180" height="52" rx="12" fill="#FFFFFF" stroke="#D1E7DD" stroke-width="1" filter="url(#shadow)"/>
+      <circle cx="26" cy="26" r="14" fill="#D8F3DC"/>
+      <text x="26" y="31" text-anchor="middle" font-size="13">⚡</text>
+      <text x="48" y="22" fill="#1B4D3E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700">98/100 Core Web Vitals</text>
+      <text x="48" y="37" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">Sub-second LCP Speed</text>
+    </g>
+
+    <!-- Lower Service Highlights -->
+    <g transform="translate(24, 275)">
+      <rect width="126" height="64" rx="12" fill="#F8FAF9" stroke="#E5E7EB"/>
+      <text x="63" y="26" text-anchor="middle" font-size="16">✨</text>
+      <text x="63" y="44" text-anchor="middle" fill="#1F2937" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700">Cosmetic Care</text>
+      <text x="63" y="56" text-anchor="middle" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">Invisalign &amp; Veneers</text>
+
+      <g transform="translate(136, 0)">
+        <rect width="126" height="64" rx="12" fill="#F8FAF9" stroke="#E5E7EB"/>
+        <text x="63" y="26" text-anchor="middle" font-size="16">🦷</text>
+        <text x="63" y="44" text-anchor="middle" fill="#1F2937" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700">Restorative</text>
+        <text x="63" y="56" text-anchor="middle" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">Implants &amp; Crowns</text>
+      </g>
+
+      <g transform="translate(272, 0)">
+        <rect width="126" height="64" rx="12" fill="#F8FAF9" stroke="#E5E7EB"/>
+        <text x="63" y="26" text-anchor="middle" font-size="16">🛡️</text>
+        <text x="63" y="44" text-anchor="middle" fill="#1F2937" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700">Zero Defect QA</text>
+        <text x="63" y="56" text-anchor="middle" fill="#6B7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">ZiFlow Protocol</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Interactive Bar: QA & Technical Highlights -->
+  <g transform="translate(60, 540)">
+    <rect width="1080" height="160" rx="20" fill="#1B4D3E" filter="url(#shadow)"/>
+
+    <g transform="translate(36, 32)">
+      <text x="0" y="16" fill="#A7D7C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" letter-spacing="1">
+        ENGINEERED BY KRISHNA PRAJAPAT • QA LEAD &amp; SENIOR WORDPRESS DEVELOPER
+      </text>
+      <text x="0" y="46" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Georgia', serif" font-size="22" font-weight="700">
+        Enterprise WordPress Implementation &amp; Zero-Defect QA Delivery
+      </text>
+      <text x="0" y="74" fill="#D1E7DD" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">
+        Custom Elementor Pro &amp; ACF Pro Architecture • HIPAA Compliance • 100% Device Compatibility • Wordfence Hardened
+      </text>
+      <text x="0" y="98" fill="#FBBF24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600">
+        Live Deployment: https://villagegreennb.wpenginepowered.com/
+      </text>
+    </g>
+
+    <g transform="translate(860, 48)">
+      <rect width="180" height="64" rx="14" fill="#2D6A4F" stroke="#52796F" stroke-width="1"/>
+      <text x="90" y="28" text-anchor="middle" fill="#A7D7C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="700" letter-spacing="1">ZIFLOW PROTOCOL</text>
+      <text x="90" y="48" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="800">ZERO DEFECTS</text>
+    </g>
+  </g>
+</svg>
