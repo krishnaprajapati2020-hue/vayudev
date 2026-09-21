@@ -42,10 +42,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      data-lenis-prevent="true"
     >
       <div
         className="relative w-full max-w-4xl rounded-3xl bg-[#FAF8F5] p-4 sm:p-8 md:p-10 text-[#111111] shadow-2xl border border-stone-300 max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
+        data-lenis-prevent="true"
       >
         {/* Close Button */}
         <button

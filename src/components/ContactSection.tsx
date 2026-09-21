@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import EyeTrackingBackground from './EyeTrackingBackground';
+import { scrollToTarget } from '../utils/smoothScroll';
 
 export default function ContactSection() {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -53,10 +54,7 @@ export default function ContactSection() {
   };
 
   const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToTarget('#' + id, { duration: 1.2 });
   };
 
   return (
@@ -108,7 +106,7 @@ export default function ContactSection() {
       </div>
 
       {/* 
-        3rd Child: Krishna Prajapat's Developer Identity & Quick Navigation Card
+        3rd Child: Krishna Prajapati's Developer Identity & Quick Navigation Card
       */}
       <div className="jobs z-20 w-full max-w-lg lg:w-[300px] xl:w-[360px] 2xl:w-[410px] bg-[#721C1C]/90 backdrop-blur-xl border border-[#F5C451]/35 rounded-3xl p-5 sm:p-7 shadow-2xl transition-all hover:border-[#F5C451]/55 lg:absolute lg:left-4 xl:left-8 2xl:left-14 lg:top-1/2 lg:-translate-y-1/2 order-3 my-3 mx-auto lg:my-0">
         {/* Status Header */}
@@ -125,7 +123,7 @@ export default function ContactSection() {
         {/* Name & Title */}
         <div className="headline job-title mb-2">
           <h3 className="font-display text-2xl sm:text-3xl text-[#EFECE6] font-bold leading-tight">
-            Krishna <span className="text-[#F5C451]">Prajapat</span>
+            Krishna <span className="text-[#F5C451]">Prajapati</span>
           </h3>
         </div>
 
@@ -175,7 +173,7 @@ export default function ContactSection() {
       </div>
 
       {/* 
-        4th Child: Krishna Prajapat's Direct Contact Information Card
+        4th Child: Krishna Prajapati's Direct Contact Information Card
       */}
       <div className="contact z-20 w-full max-w-lg lg:w-[300px] xl:w-[360px] 2xl:w-[410px] bg-[#721C1C]/90 backdrop-blur-xl border border-[#F5C451]/35 rounded-3xl p-5 sm:p-7 shadow-2xl transition-all hover:border-[#F5C451]/55 lg:absolute lg:right-4 xl:right-8 2xl:right-14 lg:top-1/2 lg:-translate-y-1/2 order-4 my-3 mx-auto lg:my-0">
         {/* Header Tag */}
@@ -272,7 +270,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              title="LinkedIn Profile — Krishna Prajapat"
+              title="LinkedIn Profile — Krishna Prajapati"
               className="w-8 h-8 rounded-full bg-black/40 border border-[#F5C451]/30 hover:border-[#F5C451] hover:bg-[#F5C451]/20 flex items-center justify-center text-[#F5C451] transition-all"
             >
               <img src="/linkedin.svg" alt="LinkedIn" width="16" height="16" />
@@ -312,7 +310,7 @@ export default function ContactSection() {
       {/* 5th Child: Bottom Signature Caption */}
       <div className="bottom-caption relative z-20 text-center w-full pt-6 lg:pt-0 lg:absolute lg:bottom-4 lg:left-0 lg:right-0 pointer-events-none px-4 order-5">
         <p className="text-xs font-mono tracking-widest uppercase text-[#F5C451]/90">
-          © {new Date().getFullYear()} Krishna Prajapat • Senior WordPress Developer & QA Lead • Mumbai, India
+          © {new Date().getFullYear()} Krishna Prajapati • Senior WordPress Developer & QA Lead • Mumbai, India
         </p>
       </div>
 
@@ -339,6 +337,7 @@ export default function ContactSection() {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
               className="relative z-10 w-full max-w-md h-full bg-[#141414]/95 border-l border-[#F5C451]/30 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl flex flex-col justify-between overflow-y-auto text-[#EFECE6]"
+              data-lenis-prevent="true"
             >
               <div>
                 {/* Header */}

@@ -1,13 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { scrollToTarget } from '../utils/smoothScroll';
 
 export default function AboutSection() {
   const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToTarget('#' + id, { duration: 1.2 });
   };
 
   return (
@@ -64,7 +62,7 @@ export default function AboutSection() {
                 Meet
               </span>
               <h2 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#8C2424] tracking-tight leading-none uppercase break-words">
-                KRISHNA PRAJAPAT
+                KRISHNA PRAJAPATI
               </h2>
 
               {/* Badges Row */}

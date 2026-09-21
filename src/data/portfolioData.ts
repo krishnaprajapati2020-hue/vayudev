@@ -1,7 +1,7 @@
 import { Project, Experience, Education, SkillCategory, Testimonial } from '../types';
 
 export const PERSONAL_INFO = {
-  name: 'Krishna Prajapat',
+  name: 'Krishna Prajapati',
   shortName: 'KP',
   title: 'Senior WordPress Developer & QA Lead',
   role: 'Quality Assurance Lead & Senior WordPress Developer',
@@ -362,7 +362,7 @@ export function getImageLabel(url: string): string {
   return 'Full Page View';
 }
 
-// Live websites from Krishna Prajapat resume for the directory section
+// Live websites from Krishna Prajapati resume for the directory section
 export const LIVE_WEBSITES_DIRECTORY = {
   landingPages: [
     { title: 'Everyone By One (Cleaning Exam)', url: 'https://everyonebyostg.wpenginepowered.com/cleaning-exam/' },

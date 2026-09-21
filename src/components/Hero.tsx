@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { scrollToTarget } from '../utils/smoothScroll';
 
 interface HeroProps {
   onCtaClick?: () => void;
@@ -94,10 +95,7 @@ export default function Hero({ onCtaClick, replayKey = 0 }: HeroProps) {
     if (onCtaClick) {
       onCtaClick();
     } else {
-      const contactEl = document.getElementById('contact');
-      if (contactEl) {
-        contactEl.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToTarget('#contact', { duration: 1.4 });
     }
   };
 
@@ -136,7 +134,7 @@ export default function Hero({ onCtaClick, replayKey = 0 }: HeroProps) {
               Hello, I'm
             </span>
             <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#111111] tracking-tight leading-none break-words">
-              KRISHNA PRAJAPAT
+              KRISHNA PRAJAPATI
             </h1>
           </div>
 

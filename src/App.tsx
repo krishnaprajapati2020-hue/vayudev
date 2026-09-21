@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Splash from './components/Splash';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,20 +11,23 @@ import ContactSection from './components/ContactSection';
 import CustomCursor from './components/CustomCursor';
 import ScrollProgress from './components/ScrollProgress';
 import InteractiveTicker from './components/InteractiveTicker';
+import { initSmoothScroll, scrollToTarget } from './utils/smoothScroll';
 
 export default function App() {
   const [replayKey, setReplayKey] = useState(0);
 
+  useEffect(() => {
+    const cleanup = initSmoothScroll();
+    return cleanup;
+  }, []);
+
   const handleReplayIntro = () => {
     setReplayKey((prev) => prev + 1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTarget(0, { duration: 1.2 });
   };
 
   const handleHeroCta = () => {
-    const contactEl = document.getElementById('contact');
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToTarget('#contact', { duration: 1.4 });
   };
 
   return (

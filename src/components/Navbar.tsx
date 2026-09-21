@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { scrollToTarget } from '../utils/smoothScroll';
 
 interface NavbarProps {
   onReplayIntro?: () => void;
@@ -39,10 +40,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
 
   const handleNavClick = (id: string) => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToTarget('#' + id, { duration: 1.2 });
   };
 
   return (
