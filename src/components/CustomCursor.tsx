@@ -21,6 +21,35 @@ export default function CustomCursor() {
     let ringY = -100;
     let rafId: number = 0;
 
+    let isRunning = false;
+
+    const render = () => {
+      const dx = mouseX - ringX;
+      const dy = mouseY - ringY;
+      ringX += dx * 0.22;
+      ringY += dy * 0.22;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      }
+
+      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+        rafId = requestAnimationFrame(render);
+        isRunning = true;
+      } else {
+        ringX = mouseX;
+        ringY = mouseY;
+        isRunning = false;
+      }
+    };
+
+    const wakeUp = () => {
+      if (!isRunning) {
+        isRunning = true;
+        rafId = requestAnimationFrame(render);
+      }
+    };
+
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -28,6 +57,8 @@ export default function CustomCursor() {
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
       }
+
+      wakeUp();
 
       // Check element under cursor
       const target = e.target as HTMLElement | null;
@@ -38,7 +69,7 @@ export default function CustomCursor() {
 
         if (interactive) {
           const text = interactive.getAttribute('data-cursor') || '';
-          setCursorText(text);
+          setCursorText((prev) => (prev !== text ? text : prev));
           setCursorVariant('hover');
         } else if (card) {
           setCursorText('EXPLORE');
@@ -51,16 +82,6 @@ export default function CustomCursor() {
           setCursorVariant('default');
         }
       }
-    };
-
-    const render = () => {
-      ringX += (mouseX - ringX) * 0.22;
-      ringY += (mouseY - ringY) * 0.22;
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-      }
-      rafId = requestAnimationFrame(render);
     };
 
     const onMouseLeave = () => setCursorVariant('hidden');

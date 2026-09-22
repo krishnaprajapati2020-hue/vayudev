@@ -11,22 +11,30 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Track active section on scroll
+  // Track active section on scroll using throttled requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'education', 'skills', 'projects', 'contact'];
-      const scrollPos = window.scrollY + 200;
+    let ticking = false;
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(sectionId);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = ['hero', 'about', 'experience', 'education', 'skills', 'projects', 'contact'];
+          const scrollPos = window.scrollY + 220;
+
+          for (const sectionId of sections) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+              const top = el.offsetTop;
+              const height = el.offsetHeight;
+              if (scrollPos >= top && scrollPos < top + height) {
+                setActiveSection(sectionId);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
