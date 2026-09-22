@@ -14,6 +14,11 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
+  livePages?: {
+    key: string;
+    label: string;
+    url: string;
+  }[];
   images: {
     hero: string;
     gallery: string[];

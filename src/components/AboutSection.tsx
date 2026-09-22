@@ -45,6 +45,9 @@ export default function AboutSection() {
                 alt={PERSONAL_INFO.name}
                 className="w-full h-auto object-contain drop-shadow-2xl"
                 loading="lazy"
+                decoding="async"
+                width="440"
+                height="440"
               />
             </motion.div>
           </div>

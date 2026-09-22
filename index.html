@@ -9,10 +9,20 @@
     <meta property="og:title" content="Krishna Prajapati — WordPress Developer Portfolio" />
     <meta property="og:description" content="Portfolio of Krishna Prajapati, QA Lead & Senior WordPress Developer in Mumbai, India. 3+ years experience, 120+ live client websites, custom themes, performance and QA leadership." />
     <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FAF8F5" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Preload LCP hero background image -->
+    <link rel="preload" as="image" href="/assets/hero-base-recolored.webp" type="image/webp" fetchpriority="high" />
+    <!-- Asynchronous non-blocking web font loading -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" />
+    </noscript>
   </head>
   <body class="bg-[#FAF8F5] text-[#111111] antialiased selection:bg-[#8C2424] selection:text-white">
     <div id="root"></div>

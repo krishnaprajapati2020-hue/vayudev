@@ -1,59 +1,78 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [cursorText, setCursorText] = useState('');
   const [cursorVariant, setCursorVariant] = useState<'default' | 'hover' | 'card' | 'hidden'>('default');
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    // Detect touch device
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Detect touch device or reduced motion
+    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsTouchDevice(true);
       return;
     }
 
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let rafId: number = 0;
+
     const onMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
+      }
 
       // Check element under cursor
       const target = e.target as HTMLElement | null;
-      if (!target) return;
+      if (target) {
+        const interactive = target.closest('[data-cursor]');
+        const clickable = target.closest('button, a, input, textarea, select');
+        const card = target.closest('[data-cursor-card]');
 
-      const interactive = target.closest('[data-cursor]');
-      const clickable = target.closest('button, a, input, textarea, select');
-      const card = target.closest('[data-cursor-card]');
-
-      if (interactive) {
-        const text = interactive.getAttribute('data-cursor') || '';
-        setCursorText(text);
-        setCursorVariant('hover');
-      } else if (card) {
-        setCursorText('EXPLORE');
-        setCursorVariant('card');
-      } else if (clickable) {
-        setCursorText('');
-        setCursorVariant('hover');
-      } else {
-        setCursorText('');
-        setCursorVariant('default');
+        if (interactive) {
+          const text = interactive.getAttribute('data-cursor') || '';
+          setCursorText(text);
+          setCursorVariant('hover');
+        } else if (card) {
+          setCursorText('EXPLORE');
+          setCursorVariant('card');
+        } else if (clickable) {
+          setCursorText('');
+          setCursorVariant('hover');
+        } else {
+          setCursorText('');
+          setCursorVariant('default');
+        }
       }
     };
 
-    const onMouseLeave = () => {
-      setCursorVariant('hidden');
+    const render = () => {
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
+      rafId = requestAnimationFrame(render);
     };
 
-    const onMouseEnter = () => {
-      setCursorVariant('default');
-    };
+    const onMouseLeave = () => setCursorVariant('hidden');
+    const onMouseEnter = () => setCursorVariant('default');
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
+    rafId = requestAnimationFrame(render);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
@@ -62,46 +81,33 @@ export default function CustomCursor() {
 
   if (isTouchDevice || cursorVariant === 'hidden') return null;
 
+  const ringSizeClass =
+    cursorVariant === 'card'
+      ? 'w-18 h-18 text-[10px]'
+      : cursorVariant === 'hover'
+      ? 'w-12 h-12 text-[9px]'
+      : 'w-8 h-8 text-[9px]';
+
   return (
-    <div className="pointer-events-none fixed inset-0 z-9999 overflow-hidden">
-      {/* Outer ambient glow ring */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border border-[#8C2424]/40 bg-[#8C2424]/10 backdrop-blur-[1px] flex items-center justify-center font-mono text-[9px] font-bold text-[#8C2424] tracking-wider pointer-events-none"
-        animate={{
-          x: mousePosition.x - (cursorVariant === 'card' ? 36 : cursorVariant === 'hover' ? 24 : 16),
-          y: mousePosition.y - (cursorVariant === 'card' ? 36 : cursorVariant === 'hover' ? 24 : 16),
-          width: cursorVariant === 'card' ? 72 : cursorVariant === 'hover' ? 48 : 32,
-          height: cursorVariant === 'card' ? 72 : cursorVariant === 'hover' ? 48 : 32,
-          scale: cursorVariant === 'card' ? 1.1 : cursorVariant === 'hover' ? 1.2 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          damping: 28,
-          stiffness: 300,
-          mass: 0.5,
-        }}
+    <div className="pointer-events-none fixed inset-0 z-9999 overflow-hidden" aria-hidden="true">
+      {/* Outer ambient ring with hardware-accelerated transform */}
+      <div
+        ref={ringRef}
+        className={`fixed top-0 left-0 rounded-full border border-[#8C2424]/40 bg-[#8C2424]/10 backdrop-blur-[1px] flex items-center justify-center font-mono font-bold text-[#8C2424] tracking-wider pointer-events-none transition-[width,height] duration-200 will-change-transform ${ringSizeClass}`}
+        style={{ transform: 'translate3d(-100px, -100px, 0)' }}
       >
         {cursorText && (
           <span className="select-none animate-pulse uppercase">
             {cursorText}
           </span>
         )}
-      </motion.div>
+      </div>
 
-      {/* Center pinpoint dot */}
-      <motion.div
-        className="fixed top-0 left-0 h-2 w-2 rounded-full bg-[#8C2424] pointer-events-none shadow-sm"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: cursorVariant === 'hover' || cursorVariant === 'card' ? 0.5 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          damping: 35,
-          stiffness: 450,
-          mass: 0.2,
-        }}
+      {/* Center pinpoint dot with hardware-accelerated transform */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 h-2 w-2 rounded-full bg-[#8C2424] pointer-events-none shadow-sm will-change-transform"
+        style={{ transform: 'translate3d(-100px, -100px, 0)' }}
       />
     </div>
   );

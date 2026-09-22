@@ -7,85 +7,100 @@ interface HeroProps {
 }
 
 export default function Hero({ onCtaClick, replayKey = 0 }: HeroProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const revealImgRef = useRef<HTMLDivElement | null>(null);
 
-  // Spotlight reveal following mouse or touch
+  // High-performance GPU-accelerated spotlight mask (zero canvas / zero toDataURL CPU churn)
   useEffect(() => {
-    const canvas = canvasRef.current;
     const imgLayer = revealImgRef.current;
-    if (!canvas || !imgLayer) return;
+    if (!imgLayer) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
+    let animationFrameId: number = 0;
+    let isIntersecting = true;
+    let isRunning = false;
     const SPOTLIGHT_R = 260;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
     const mouse = { x: -999, y: -999 };
     const smooth = { x: -999, y: -999 };
 
+    const updateMask = () => {
+      if (smooth.x < -500 || smooth.y < -500) {
+        imgLayer.style.webkitMaskImage = 'none';
+        imgLayer.style.maskImage = 'none';
+        imgLayer.style.opacity = '0';
+        return;
+      }
+      imgLayer.style.opacity = '1';
+      const maskVal = `radial-gradient(circle ${SPOTLIGHT_R}px at ${smooth.x.toFixed(1)}px ${smooth.y.toFixed(1)}px, black 0%, black 40%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0.12) 88%, transparent 100%)`;
+      imgLayer.style.webkitMaskImage = maskVal;
+      imgLayer.style.maskImage = maskVal;
+    };
+
+    const loop = () => {
+      const dx = mouse.x - smooth.x;
+      const dy = mouse.y - smooth.y;
+
+      if (Math.abs(dx) > 0.3 || Math.abs(dy) > 0.3) {
+        smooth.x += dx * 0.15;
+        smooth.y += dy * 0.15;
+        updateMask();
+        if (isIntersecting) {
+          animationFrameId = requestAnimationFrame(loop);
+          isRunning = true;
+        } else {
+          isRunning = false;
+        }
+      } else {
+        smooth.x = mouse.x;
+        smooth.y = mouse.y;
+        updateMask();
+        isRunning = false;
+      }
+    };
+
+    const wakeUp = () => {
+      if (!isRunning && isIntersecting) {
+        isRunning = true;
+        animationFrameId = requestAnimationFrame(loop);
+      }
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+      wakeUp();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         mouse.x = e.touches[0].clientX;
         mouse.y = e.touches[0].clientY;
+        wakeUp();
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
-    const loop = () => {
-      smooth.x += (mouse.x - smooth.x) * 0.1;
-      smooth.y += (mouse.y - smooth.y) * 0.1;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const grad = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, SPOTLIGHT_R);
-      grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.4, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.6, 'rgba(255,255,255,0.75)');
-      grad.addColorStop(0.75, 'rgba(255,255,255,0.4)');
-      grad.addColorStop(0.88, 'rgba(255,255,255,0.12)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-
-      ctx.beginPath();
-      ctx.arc(smooth.x, smooth.y, SPOTLIGHT_R, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      try {
-        const dataUrl = canvas.toDataURL();
-        imgLayer.style.webkitMaskImage = 'url(' + dataUrl + ')';
-        imgLayer.style.maskImage = 'url(' + dataUrl + ')';
-        imgLayer.style.webkitMaskSize = '100% 100%';
-        imgLayer.style.maskSize = '100% 100%';
-      } catch {
-        // Fallback for security constrained environments
-        imgLayer.style.opacity = '1';
-      }
-
-      animationFrameId = requestAnimationFrame(loop);
-    };
-
-    loop();
+    const heroEl = document.getElementById('hero');
+    let observer: IntersectionObserver | null = null;
+    if (heroEl && typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          isIntersecting = entry.isIntersecting;
+          if (isIntersecting) wakeUp();
+          else if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            isRunning = false;
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(heroEl);
+    }
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', resizeCanvas);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      if (observer) observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
     };
@@ -106,22 +121,21 @@ export default function Hero({ onCtaClick, replayKey = 0 }: HeroProps) {
         <h2>WordPress</h2>
       </div>
 
-      {/* Base image (recolored red hoodie) */}
+      {/* Base image (optimized WebP) */}
       <div
         className="hero-base-img hero-image-animate"
         style={{
-          backgroundImage: "url('/assets/hero-base-recolored.png')",
+          backgroundImage: "url('/assets/hero-base-recolored.webp'), url('/assets/hero-base-recolored.png')",
         }}
       />
 
-      {/* Reveal layer (recolored red hoodie with electric blue flames) */}
-      <canvas id="reveal-canvas" ref={canvasRef} />
+      {/* Reveal layer (optimized WebP) */}
       <div
         className="hero-reveal-img"
         id="reveal-img"
         ref={revealImgRef}
         style={{
-          backgroundImage: "url('/assets/hero-reveal-recolored.png')",
+          backgroundImage: "url('/assets/hero-reveal-recolored.webp'), url('/assets/hero-reveal-recolored.png')",
         }}
       />
 

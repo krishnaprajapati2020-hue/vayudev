@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { ArrowUpRight, Check, ExternalLink, Github, X } from 'lucide-react';
+import { useEffect } from 'react';
+import { ArrowUpRight, Check, Github, X } from 'lucide-react';
 import { Project } from '../types';
-import { ScrollableScreenshot } from './ScrollableScreenshot';
-import { getImageLabel } from '../data/portfolioData';
+import LiveSitePreview from './LiveSitePreview';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -10,14 +9,6 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
-  const [activeImage, setActiveImage] = useState<string>('');
-
-  useEffect(() => {
-    if (project) {
-      setActiveImage(project.images.hero);
-    }
-  }, [project]);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -42,12 +33,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      data-lenis-prevent="true"
     >
       <div
         className="relative w-full max-w-4xl rounded-3xl bg-[#FAF8F5] p-4 sm:p-8 md:p-10 text-[#111111] shadow-2xl border border-stone-300 max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
-        data-lenis-prevent="true"
       >
         {/* Close Button */}
         <button
@@ -77,23 +66,19 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </p>
         </div>
 
-        {/* Interactive Full-Page Scrollable Screenshot */}
+        {/* Direct Live Desktop Site Experience */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#8C2424] font-bold">
-              Active View: {getImageLabel(activeImage || project.images.hero)}
-            </span>
-            <span className="text-xs font-mono text-stone-500 hidden sm:inline">
-              Hover over image to auto-scroll full page
-            </span>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#8C2424] font-bold">
+                Live Production Site
+              </span>
+            </div>
           </div>
-          <ScrollableScreenshot
-            src={activeImage || project.images.hero}
-            alt={`${project.title} - ${getImageLabel(activeImage || project.images.hero)}`}
-            liveUrl={project.liveUrl}
-            title={project.title}
-            fallbackSrc={project.images.hero}
-            heightClass="h-[300px] sm:h-[460px] lg:h-[540px]"
+
+          <LiveSitePreview
+            project={project}
+            heightClass="h-[380px] sm:h-[460px] lg:h-[520px]"
           />
         </div>
 
@@ -172,55 +157,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </div>
         </div>
-
-        {/* Gallery Grid */}
-        {[project.images.hero, ...project.images.gallery].length > 1 && (
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-stone-500 font-bold">
-                Visual Gallery & Deliverables (Click to switch preview)
-              </h3>
-              <span className="text-xs font-mono text-stone-400">
-                {[project.images.hero, ...project.images.gallery].length} Views available
-              </span>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[project.images.hero, ...project.images.gallery].map((img, i) => {
-                const label = getImageLabel(img);
-                const isActive = (activeImage || project.images.hero) === img;
-                return (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImage(img)}
-                    className={`group relative aspect-4/3 overflow-hidden rounded-xl bg-stone-200 border-2 transition-all cursor-pointer ${
-                      isActive
-                        ? 'border-[#8C2424] ring-2 ring-[#8C2424]/30 shadow-md scale-[1.02]'
-                        : 'border-stone-300 opacity-70 hover:opacity-100 hover:border-stone-400'
-                    }`}
-                    title={`View ${label}`}
-                  >
-                    <img
-                      src={encodeURI(img)}
-                      alt={label}
-                      className="absolute inset-0 h-full w-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (!target.dataset.fallback) {
-                          target.dataset.fallback = 'true';
-                          target.src = '/assets/village-green-preview.svg';
-                        }
-                      }}
-                    />
-                    {isActive && (
-                      <span className="absolute top-2 right-2 z-10 h-2.5 w-2.5 rounded-full bg-[#8C2424] ring-2 ring-white shadow-sm" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
         {/* Footer Actions */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-stone-200">

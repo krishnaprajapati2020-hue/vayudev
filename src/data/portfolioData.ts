@@ -201,6 +201,12 @@ export const PROJECTS: Project[] = [
     tags: ['WordPress', 'PHP', 'ACF Pro', 'Elementor Pro', 'Core Web Vitals', 'ZiFlow QA', 'Healthcare SEO'],
     liveUrl: 'https://villagegreennb.wpenginepowered.com/',
     githubUrl: 'https://linkedin.com/in/kri5hna',
+    livePages: [
+      { key: 'home', label: 'Home Page', url: 'https://villagegreennb.wpenginepowered.com/' },
+      { key: 'about', label: 'About Page', url: 'https://villagegreennb.wpenginepowered.com/about/' },
+      { key: 'services', label: 'Services Page', url: 'https://villagegreennb.wpenginepowered.com/services/' },
+      { key: 'contact', label: 'Contact Page', url: 'https://villagegreennb.wpenginepowered.com/contact/' },
+    ],
     images: {
       hero: '/assets/portfolio/village green dental/home.png',
       gallery: [
@@ -236,6 +242,12 @@ export const PROJECTS: Project[] = [
     tags: ['WordPress', 'PHP', 'Elementor Pro', 'Healthcare UX', 'ZiFlow QA', 'Responsive Design'],
     liveUrl: 'https://evergreendcstg.wpenginepowered.com/',
     githubUrl: 'https://linkedin.com/in/kri5hna',
+    livePages: [
+      { key: 'home', label: 'Home Page', url: 'https://evergreendcstg.wpenginepowered.com/' },
+      { key: 'about', label: 'Doctor Page', url: 'https://evergreendcstg.wpenginepowered.com/meet-our-dentists/' },
+      { key: 'services', label: 'Services Page', url: 'https://evergreendcstg.wpenginepowered.com/services/' },
+      { key: 'contact', label: 'Contact Page', url: 'https://evergreendcstg.wpenginepowered.com/contact/' },
+    ],
     images: {
       hero: '/assets/portfolio/evergreen dental/home.png',
       gallery: [
@@ -270,6 +282,9 @@ export const PROJECTS: Project[] = [
     tags: ['WordPress', 'HTML5/SCSS', 'JavaScript', 'Elementor', 'SEO Optimization', 'Lead Capture'],
     liveUrl: 'https://realtechdevelopers.com/',
     githubUrl: 'https://linkedin.com/in/kri5hna',
+    livePages: [
+      { key: 'home', label: 'Home Page', url: 'https://realtechdevelopers.com/' },
+    ],
     images: {
       hero: '/assets/portfolio/realtech developers/home page.png',
       gallery: []
@@ -301,6 +316,9 @@ export const PROJECTS: Project[] = [
     tags: ['WordPress', 'PHP', 'Elementor Pro', 'Healthcare SEO', 'Lead Generation', 'ZiFlow QA'],
     liveUrl: 'https://metropolisden.wpenginepowered.com/',
     githubUrl: 'https://linkedin.com/in/kri5hna',
+    livePages: [
+      { key: 'home', label: 'Landing Page', url: 'https://metropolisden.wpenginepowered.com/' },
+    ],
     images: {
       hero: '/assets/portfolio/metropolice dental landing page/single page.png',
       gallery: []
@@ -332,6 +350,9 @@ export const PROJECTS: Project[] = [
     tags: ['WordPress', 'PHP', 'Elementor Pro', 'Conversion Rate Optimization', 'Healthcare UX'],
     liveUrl: 'https://everyonebyostg.wpenginepowered.com/cleaning-exam/',
     githubUrl: 'https://linkedin.com/in/kri5hna',
+    livePages: [
+      { key: 'home', label: 'Offer Landing Page', url: 'https://everyonebyostg.wpenginepowered.com/cleaning-exam/' },
+    ],
     images: {
       hero: '/assets/portfolio/everyonebyone landing page/single page.png',
       gallery: []

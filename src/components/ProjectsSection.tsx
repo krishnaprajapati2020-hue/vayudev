@@ -1,37 +1,18 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import {
   ArrowUpRight,
-  CheckCircle,
-  ExternalLink,
   Eye,
-  Globe,
-  Layers,
-  ShieldCheck,
-  Sparkles
 } from 'lucide-react';
-import { PROJECTS, LIVE_WEBSITES_DIRECTORY, getImageLabel } from '../data/portfolioData';
+import { PROJECTS, LIVE_WEBSITES_DIRECTORY } from '../data/portfolioData';
 import { Project } from '../types';
 import ProjectModal from './ProjectModal';
-import { ScrollableScreenshot } from './ScrollableScreenshot';
+import LiveSitePreview from './LiveSitePreview';
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'wordpress' | 'landing' | 'directory'>('all');
-  const [activeImgIndex, setActiveImgIndex] = useState<{ [key: string]: number }>({
-    'project-1': 0,
-    'project-3': 0,
-    'project-4': 0,
-    'project-5': 0,
-    'project-6': 0
-  });
-
-  const handleThumbnailClick = (projectId: string, index: number) => {
-    setActiveImgIndex((prev) => ({
-      ...prev,
-      [projectId]: index,
-    }));
-  };
+  const [activeProjectPage, setActiveProjectPage] = useState<{ [key: string]: string }>({});
 
   const filteredProjects = PROJECTS.filter((p) => {
     if (activeTab === 'all') return true;
@@ -109,9 +90,6 @@ export default function ProjectsSection() {
         {activeTab !== 'directory' && (
           <div className="space-y-12 sm:space-y-16">
             {filteredProjects.map((project, index) => {
-              const currentImgIdx = activeImgIndex[project.id] || 0;
-              const allImages = [project.images.hero, ...project.images.gallery];
-
               return (
                 <motion.div
                   key={project.id}
@@ -123,55 +101,49 @@ export default function ProjectsSection() {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     
-                    {/* Left Column: Full-Page Normal Screenshot Viewer with Hover Auto-Scroll */}
+                    {/* Left Column: Direct Desktop Live Website Viewport */}
                     <div className="lg:col-span-7 flex flex-col gap-3">
+                      {/* Top Preview Status - Mentioned Once Cleanly */}
+                      <div className="flex items-center justify-between px-1">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300/60 shadow-2xs">
+                            <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                            <span>Live Production Site</span>
+                          </span>
+                        </div>
+                      </div>
 
-                      {/* Normal Image Showcase with Hover Smooth Scroll */}
-                      <ScrollableScreenshot
-                        src={allImages[currentImgIdx]}
-                        alt={`${project.title} - ${getImageLabel(allImages[currentImgIdx])}`}
-                        liveUrl={project.liveUrl}
-                        title={project.title}
-                        fallbackSrc={project.images.hero}
-                        heightClass="h-[320px] sm:h-[440px] lg:h-[490px]"
-                        onExpand={() => setSelectedProject(project)}
+                      {/* Desktop Live Website Viewport */}
+                      <LiveSitePreview
+                        project={project}
+                        initialTab={activeProjectPage[project.id] || (project.livePages?.[0]?.key ?? 'home')}
+                        heightClass="h-[360px] sm:h-[440px] lg:h-[480px]"
                       />
 
-                      {/* Image Thumbnails */}
-                      {allImages.length > 1 && (
-                        <div className="flex items-center gap-2.5 overflow-x-auto py-1 px-0.5 scrollbar-thin">
-                          {allImages.map((img, i) => {
-                            const label = getImageLabel(img);
-                            const isActive = currentImgIdx === i;
+                      {/* Interactive Page Navigation Pills */}
+                      {project.livePages && project.livePages.length > 1 && (
+                        <div className="flex items-center gap-2 overflow-x-auto py-1 px-0.5 scrollbar-thin">
+                          <span className="text-[11px] font-mono text-stone-500 shrink-0 uppercase tracking-wider font-semibold">
+                            Pages:
+                          </span>
+                          {project.livePages.map((page) => {
+                            const isCurrent = (activeProjectPage[project.id] || project.livePages![0].key) === page.key;
                             return (
                               <button
-                                key={i}
-                                onClick={() => handleThumbnailClick(project.id, i)}
-                                className={`group relative h-16 w-24 shrink-0 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                                  isActive
-                                    ? 'border-[#8C2424] shadow-md ring-2 ring-[#8C2424]/30 scale-[1.02]'
-                                    : 'border-stone-300 opacity-70 hover:opacity-100 hover:border-stone-400'
+                                key={page.key}
+                                onClick={() =>
+                                  setActiveProjectPage((prev) => ({
+                                    ...prev,
+                                    [project.id]: page.key,
+                                  }))
+                                }
+                                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all shrink-0 cursor-pointer border ${
+                                  isCurrent
+                                    ? 'bg-[#8C2424] text-white border-[#8C2424] shadow-xs font-semibold'
+                                    : 'bg-white text-stone-700 border-stone-300 hover:bg-stone-100 hover:border-stone-400'
                                 }`}
-                                title={`View ${label}`}
                               >
-                                <img
-                                  src={encodeURI(img)}
-                                  alt={label}
-                                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                                  loading="lazy"
-                                  referrerPolicy="no-referrer"
-                                  onError={(e) => {
-                                    const target = e.currentTarget;
-                                    if (!target.dataset.fallback) {
-                                      target.dataset.fallback = 'true';
-                                      target.src = '/assets/village-green-services.svg';
-                                    }
-                                  }}
-                                />
-
-                                {isActive && (
-                                  <span className="absolute top-1.5 right-1.5 z-10 h-2.5 w-2.5 rounded-full bg-[#8C2424] ring-2 ring-white shadow-sm" />
-                                )}
+                                {page.label}
                               </button>
                             );
                           })}

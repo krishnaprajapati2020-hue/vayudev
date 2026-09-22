@@ -47,6 +47,9 @@ export default function EducationSection() {
                 alt={PERSONAL_INFO.name}
                 className="w-full h-auto object-contain drop-shadow-2xl hover:scale-102 transition-transform duration-500"
                 loading="lazy"
+                decoding="async"
+                width="440"
+                height="440"
               />
             </motion.div>
           </div>

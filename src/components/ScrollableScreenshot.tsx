@@ -188,7 +188,6 @@ export const ScrollableScreenshot: React.FC<ScrollableScreenshotProps> = ({
         onScroll={handleScroll}
         className={`relative w-full ${heightClass} overflow-y-auto overflow-x-hidden bg-stone-950 cursor-ns-resize`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        data-lenis-prevent="true"
       >
         {/* Loading shimmer skeleton */}
         {!isLoaded && (
@@ -208,6 +207,7 @@ export const ScrollableScreenshot: React.FC<ScrollableScreenshotProps> = ({
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           loading="lazy"
+          decoding="async"
           referrerPolicy="no-referrer"
         />
 

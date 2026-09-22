@@ -48,7 +48,7 @@ export default function InteractiveTicker({
       data-cursor="SCROLL"
     >
       <motion.div
-        className="flex whitespace-nowrap"
+        className="flex whitespace-nowrap will-change-transform"
         animate={{
           x: direction === 'left' ? ['0%', '-33.333%'] : ['-33.333%', '0%'],
         }}

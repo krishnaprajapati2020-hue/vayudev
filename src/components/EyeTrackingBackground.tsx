@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { timeForAngle } from '../data/gazeFrames';
 
 interface EyeTrackingBackgroundProps {
@@ -12,9 +12,32 @@ export default function EyeTrackingBackground({
   className = '',
   opacity = 1,
 }: EyeTrackingBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Lazy load video only when entering or near viewport
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: '300px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
+    if (!isVisible) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -95,22 +118,25 @@ export default function EyeTrackingBackground({
       window.removeEventListener('resize', updateTarget);
       window.removeEventListener('scroll', updateTarget);
     };
-  }, []);
+  }, [isVisible]);
 
   return (
     <div
+      ref={containerRef}
       className={`absolute inset-0 z-0 pointer-events-none overflow-hidden ${className}`}
       style={{ opacity }}
       aria-hidden="true"
     >
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        preload="auto"
-        src={videoSrc}
-        className="absolute inset-0 w-full h-full object-cover object-center"
-      />
+      {isVisible && (
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          preload="metadata"
+          src={videoSrc}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      )}
     </div>
   );
 }
