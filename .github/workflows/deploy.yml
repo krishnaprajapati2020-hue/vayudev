@@ -18,12 +18,12 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install PostCSS and Dependencies
+      - name: Install Dependencies
         run: |
           npm install @tailwindcss/postcss --save-dev
           npm install
 
-      - name: Configure PostCSS
+      - name: Configure PostCSS for Tailwind v4
         run: |
           cat << 'EOF' > postcss.config.cjs
           module.exports = {
@@ -38,22 +38,40 @@ jobs:
         run: |
           npm run build
 
-      - name: Generate .htaccess for Routing & HTTPS
+      - name: Inject Secure .htaccess File
         run: |
           cat << 'EOF' > dist/.htaccess
           <IfModule mod_rewrite.c>
             RewriteEngine On
             RewriteBase /
+
+            # Force HTTPS
             RewriteCond %{HTTPS} off
             RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+            # Route SPA clean fallback
             RewriteRule ^index\.html$ - [L]
             RewriteCond %{REQUEST_FILENAME} !-f
             RewriteCond %{REQUEST_FILENAME} !-d
             RewriteRule . /index.html [L]
           </IfModule>
+
+          # Enable Gzip Compression
+          <IfModule mod_deflate.c>
+            AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+          </IfModule>
+
+          # Browser Caching
+          <IfModule mod_expires.c>
+            ExpiresActive On
+            ExpiresByType image/webp "access plus 1 year"
+            ExpiresByType image/png "access plus 1 year"
+            ExpiresByType text/css "access plus 1 month"
+            ExpiresByType application/javascript "access plus 1 month"
+          </IfModule>
           EOF
 
-      - name: Deploy to Hostinger via FTP
+      - name: Clean Old Files & Upload Fresh Build via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -63,4 +81,4 @@ jobs:
           protocol: ftp
           local-dir: ./dist/
           server-dir: ./
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
