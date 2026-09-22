@@ -53,7 +53,7 @@ jobs:
           </IfModule>
           EOF
 
-     - name: Deploy to Hostinger via FTP
+      - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
